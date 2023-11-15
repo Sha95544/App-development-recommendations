@@ -1,0 +1,146 @@
+-- combining all the apple store description tables:
+CREATE TABLE apple_store_descriptions_combined AS
+SELECT * FROM appleStore_description1
+UNION ALL
+SELECT * FROM appleStore_description2
+UNION ALL
+SELECT * FROM appleStore_description3
+UNION ALL
+SELECT * FROM appleStore_description4;
+
+-- First we will check whether the number of apps listed in both tables are same 
+-- so that we get clarity that we are dealing with the same number of apps in both tabl
+
+SELECT COUNT(DISTINCT id) AS Unique_apps_1
+FROM AppleStore;
+-- 7197 unique IDs
+
+
+SELECT COUNT(DISTINCT id) AS Unique_apps_2
+FROM apple_store_descriptions_combined;
+-- 7197 Unique IDs
+-- thus same number of apps
+
+
+-- Next we will check for missing values in both the tables:
+-- COUNT(*) used to count the number of row in total\
+SELECT COUNT(*) AS Missing_Values
+FROM AppleStore
+WHERE user_rating is NULL OR track_name is NULL OR prime_genre is NULL OR price is NULL;
+
+-- found no missing values so table is clean
+-- doing the same for the other table:
+SELECT COUNT(*) AS Missing_Values2
+FROM apple_store_descriptions_combined
+WHERE id is NULL OR app_desc IS NULL;
+
+-- again no missing values so table is clean
+
+-- now we are counting the total number of apps by each different genre
+SELECT prime_genre AS Genre, count(prime_genre) as Number_of_Apps
+FROM AppleStore
+GROUP BY prime_genre
+ORDER BY Number_of_Apps DESC;
+-- games and entertainment genres have the highest number of apps overall
+-- so building apps within these genres will be very competitive
+-- but it also shows the app genres preferred by the users overall.
+
+-- next we will explore the maximum, min and average user rating for these apps:
+SELECT min(user_rating) AS Minimum_User_Rating,
+max(user_rating) AS Maximum_User_Rating,
+avg(user_rating) AS Average_User_Rating
+FROM AppleStore;
+
+-- Also finding the average user rating by each category:
+SELECT prime_genre,
+	avg(user_rating) AS Average_User_Rating_by_Category
+FROM AppleStore
+GROUP BY prime_genre
+ORDER BY avg(user_rating) DESC;
+
+-- Data Analysis:-----------
+-- We will now find if paid apps have higher rating than unpaid 
+SELECT 
+	CASE
+    	WHEN price > 0 THEN "Paid"
+        ELSE "Free"
+        END AS App_Type,
+        avg(user_rating) AS Average_User_Rating
+FROM AppleStore
+GROUP BY App_Type;
+-- the rating of paid apps in slighlty higher than those for free onesAppleStore
+
+-- Now we will check if apps with higher number of supported languages have higher ratingx
+SELECT 
+	CASE 
+    	WHEN lang_num<10 THEN "Less than 10 languages"
+        WHEN lang_num BETWEEN 10 AND 30 THEN "Between 10 - 30 languages"
+        ELSE "More than 30 langugaes"
+        END AS Number_Of_Supported_Languages, 
+        avg(user_rating) AS Average_User_Rating
+    FROM AppleStore
+GROUP BY Number_Of_Supported_Languages
+ORDER BY Average_User_Rating DESC;
+-- We can see that the apps supporting between 10-30 languages have higher rating so 
+-- we dont necesarilly have to focus on this aspect and focus on other features instead
+-- its not about including every possible language within an app rather focusing on the right language instead.
+
+-- Next we will find the top ten app genres that have a low overall rating:
+SELECT prime_genre AS Genre, avg(user_rating) AS Average_User_Rating
+FROM AppleStore
+GROUP BY prime_genre
+ORDER BY Average_User_Rating
+LIMIT 10;
+-- these genres signify that usrs gave a bad rating in these ten genres and so there is 
+-- a good oppurtunity to create an app within this domain
+-- finance, catalog and book categories have generally the worst ratings so that is a good oopurutnity
+-- to focus on while building the app. (chnaces of high user rating and market penetration)
+
+-- Now finding if there is any correlation between the length of the app description
+-- and the average user rating 
+
+SELECT 
+	CASE
+    	WHEN length(a2.app_desc) < 500 THen "Short"
+        WHEN length(a2.app_desc) BETWEEN 500 AND 1000 THEN "Medium"
+        ELSE "Long"
+        end as App_Description_Length,
+	AVG(user_rating) AS Average_User_Rating
+FROM AppleStore a1
+JOIN apple_store_descriptions_combined a2
+ON a1.id = a2.id
+GROUP BY App_Description_Length
+ORDER BY Average_User_Rating DESC;
+-- The longer the app description the better is the user rating on the app (more descriptive)
+-- there is a positive correlation here
+
+
+-- Now we will find the top rated apps in each category:
+-- (this query specifies the rank of each app within each genre based on its user rating
+-- and the number of users that rating was based on so apps with user ratings of 5 can have different
+-- ranks based on the total number of users who rated the app)
+
+-- SELECT track_name, 
+-- prime_genre, 
+-- user_rating, RANK() OVER (PARTITION BY prime_genre 
+-- ORDER BY user_rating DESC, rating_count_tot desc) AS Rank
+-- FROM AppleStore
+
+-- now this query will be used as a subquery to find those top  rated apps
+
+SELECT track_name,
+prime_genre,
+user_rating
+FROM (
+  SELECT track_name, 
+prime_genre, 
+user_rating,
+RANK() OVER (PARTITION BY prime_genre 
+ORDER BY user_rating DESC, rating_count_tot desc) AS App_Rank
+FROM AppleStore
+) AS Rank
+WHERE Rank.App_Rank = 1;
+-- this gives an insight to the developer on the app he should target building within each category
+-- by looking at some best rated apps within each category
+
+
