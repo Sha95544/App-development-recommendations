@@ -2,7 +2,9 @@
 ## Problem Statement
 In this example scenario we are aiding an aspiring mobile app developer seeking guidance on the next type of mobile app to build for the Apple App Store based on data driven insights. The analysis is done using SQL
 
+## Entire project walkthrough
 A full length aritcle on the entire project can be found on Medium.com at the following link:
+
 https://medium.com/@shaheer-kamal/using-data-driven-insights-to-guide-app-development-ab79c1e67e41
 
 ## Dataset
