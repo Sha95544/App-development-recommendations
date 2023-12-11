@@ -1,6 +1,9 @@
 # App development recommendations
+
+![image](https://github.com/Sha95544/App-development-recommendations/assets/62758405/192ca643-ed8c-44d0-aeb8-29da47d3b68f)
+
 ## Problem Statement
-In this example scenario we are aiding an aspiring mobile app developer seeking guidance on the next type of mobile app to build for the Apple App Store based on data driven insights. The analysis is done using SQL
+In this example scenario we are aiding an aspiring mobile app developer seeking guidance on the next type of mobile app to build for the Apple App Store based on data driven insights.
 
 ## Entire project walkthrough
 A full length aritcle on the entire project can be found on Medium.com at the following link:
