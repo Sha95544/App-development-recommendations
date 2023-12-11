@@ -8,17 +8,18 @@ A full length aritcle on the entire project can be found on Medium.com at the fo
 https://medium.com/@shaheer-kamal/using-data-driven-insights-to-guide-app-development-ab79c1e67e41
 
 ## Dataset
+
 For this project we are using an online dataset from Kaggle which gives us descriptions about the apps available on the app store.
 
-Link to the dataset: https://www.kaggle.com/datasets/ramamet4/app-store-apple-data-set-10k-apps/data
+Link to the dataset: Mobile App Store ( 7200 apps) (kaggle.com)
 
 The data comprises of two tables: 'AppleStore.csv' and 'appleStore_description.csv'.
 
 The table 'AppleStore.csv' comprises the following columns as shown below:
 
-![image](https://github.com/Sha95544/App-development-recommendations/assets/62758405/a5b3fbe9-234f-474c-b2c7-c782c88862e0)
+![image](https://github.com/Sha95544/App-development-recommendations/assets/62758405/929bbad8-3ab8-48bc-b2b8-4cc9607ba8e1)
 
-Some of the details which will be important in our analysis are shown below:
+Some of the columns in the table which will be important in our analysis are listed below:
 
 id: the unique id for each app mentioned.
 
@@ -38,9 +39,9 @@ lang_num: the total number of languages that particular app supported within the
 
 The table 'appleStore_description.csv' comprises the following columns as shown below:
 
-![image](https://github.com/Sha95544/App-development-recommendations/assets/62758405/2a7f2cd9-2003-49f4-8f2d-25693b3fd563)
+![image](https://github.com/Sha95544/App-development-recommendations/assets/62758405/428b18a8-1cae-46c4-a1b7-f71e3d742774)
 
-Some of the details shown here are:
+Some of the columns in the table which will be important in our analysis are listed below:
 
 id: The unique id for each app mentioned.
 
