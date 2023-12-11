@@ -66,3 +66,13 @@ Paid apps having higher rating than free ones could signal that in general users
 We also saw that apps supporting between 10–30 languages had a much higher rating than those supporting 10 languages only or those supporting a much greater number than 30. This could signal that it's not necessary to include every possible language within a new app rather focus on including the right languages instead which a larger user segment is comfortable with.
 
 A positive correlation between the length of the app description and the average user ratings meanns that users were in general more inclined to rate those apps higher which had longer detailed descriptions. A detailed description provide users with more detailed information about the app's features, functionality, and benefits. This transparency can lead to more informed decisions by users, potentially resulting in higher satisfaction and ratings.
+
+## Final thoughts
+
+The dataset used was created uploaded on Kaggle back in 2017 and as such may not provide the most up to date of the current app listings on the Apple Store.
+
+However, the queries used for the project can provide a framework for a data analysis process on a richer and much recent dataset for either app listings on the Apple App Store or the Google Play Store.
+
+In my opinion some important metrics related to the number of app downloads, app PG ratings and information regarding the availability of different media content on the Apple Store landing page for the app (such as videos, animations etc.) would have been a valuable addition to the dataset.
+
+This project has potential to be extended in the future where visualizations can be created using software such as 'Power BI' or 'Tableau' to present some juicy results from the analysis.
